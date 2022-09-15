@@ -15,4 +15,4 @@ var_dump($paddleTransaction);
 
 $id = new UuidFactory();
 
-echo $id->uuid4();
+echo $id->uuid4(). '<br/>';
