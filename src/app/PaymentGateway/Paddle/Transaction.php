@@ -10,13 +10,16 @@ use App\Enum\Status;
 class Transaction
 {
 
+    private static int $count = 0;
 
-    private string $status;
-    private float $transfer;
 
-    public function __construct()
-    {
+    public function __construct(
+        private string $status,
+        private float $amount,
+        private string $description,
+    ) {
         $this->status = 'pending';
+        self::$count++;
     }
 
     public function setStatus(string $status): self
@@ -28,5 +31,16 @@ class Transaction
         }
 
         return $this;
+    }
+
+
+    public function process()
+    {
+        echo 'Processing paddle transaction...';
+    }
+
+    public static function getCount(): int
+    {
+        return self::$count;
     }
 }
