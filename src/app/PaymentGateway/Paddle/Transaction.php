@@ -18,9 +18,43 @@ class Transaction
         private float $amount,
         private string $description,
     ) {
-        $this->status = 'pending';
-        self::$count++;
+        if ($this->setStatus($status)) {
+            self::$count++;
+        }
     }
+
+    /**
+     * @return float
+     */
+    public function getAmount(): float
+    {
+        return $this->amount;
+    }
+
+    /**
+     * @param float $amount
+     */
+    public function setAmount(float $amount): void
+    {
+        $this->amount = $amount;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
+
 
     public function setStatus(string $status): self
     {
@@ -34,9 +68,9 @@ class Transaction
     }
 
 
-    public function process()
+    public function process(): void
     {
-        echo 'Processing paddle transaction...';
+        echo 'Processing $' . $this->amount . ' of ' . $this->description;
     }
 
     public static function getCount(): int
