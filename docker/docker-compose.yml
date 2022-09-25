@@ -1,13 +1,15 @@
-version: '2.6'
+version: '3.8'
 
 services:
   app:
     build:
-      context: ./
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./Dockerfile
     container_name: ltrw-app
     restart: always
     working_dir: /var/www/
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - ../src:/var/www
   nginx:
@@ -19,6 +21,7 @@ services:
     volumes:
       - ../src:/var/www
       - ./nginx:/etc/nginx/conf.d
+
   db:
     container_name: ltrw-db
     image: mysql:8.0
