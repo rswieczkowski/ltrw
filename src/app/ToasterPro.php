@@ -2,23 +2,26 @@
 
 namespace App;
 
-class Toaster
+class ToasterPro extends Toaster
 {
 
-    public array $slices = [];
-    public int $size = 2;
 
-    public function addSlice(string $slice): void
+    public function __construct()
     {
-        if (count($this->slices) < $this->size) {
-            $this->slices [] = $slice;
-        }
+        parent::__construct();
+        $this->size = 4;
     }
 
-    public function toast():void
+    public function addSlice(string $slice):void
+    {
+        echo 'addSlice() from child class';
+    }
+
+
+    public function toastBeagle()
     {
         foreach ($this->slices as $i => $slice) {
-            echo ($i + 1) . ': Toasting ' . $slice . PHP_EOL;
+            echo ($i + 1) . ': Toasting ' . $slice . ' with beagle option' . PHP_EOL;
         }
     }
 

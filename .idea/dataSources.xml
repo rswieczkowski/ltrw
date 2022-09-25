@@ -7,9 +7,6 @@
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://kitchen.staging-1.eu-north-1.internal.leon.aero:3307</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
-      <driver-properties>
-        <property name="useSSL" value="FALSE" />
-      </driver-properties>
     </data-source>
   </component>
 </project>
