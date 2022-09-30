@@ -2,7 +2,10 @@
 
 namespace App\Traits;
 
-class CapuccinoMaker
+class CappuccinoMaker
 {
+
+    USE CappuccinoTrait;
+
 
 }

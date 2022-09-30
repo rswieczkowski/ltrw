@@ -1,10 +1,14 @@
 <?php
 
-namespace App;
+namespace App\Polymorphism;
 
 interface DebtCollector
 {
 
-    public function collect(float $owedAmount): float;
+    public function __construct();
+
+    public function getName();
+
+    public function collect(float $owedAmount): int;
 
 }

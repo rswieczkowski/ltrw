@@ -1,14 +1,21 @@
 <?php
 
-namespace App\LateBindings;
+namespace App\LateStaticBindings;
 
 class ClassA
 {
-    protected string $name = 'A';
 
-    public function getName(): string
+    protected static string $name = 'A';
+
+
+    public static function getName(): string
     {
-        return $this->name;
+        return static::$name;
+    }
+
+    public static function make(): static
+    {
+        return new static();
     }
 
 }

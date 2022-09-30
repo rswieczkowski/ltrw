@@ -1,9 +1,9 @@
 <?php
 
-namespace App\LateBindings;
+namespace App\LateStaticBindings;
 
 class ClassB extends classA
 {
-    protected string $name = 'B';
+    protected static string $name = 'B';
 
 }

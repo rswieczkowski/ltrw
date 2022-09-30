@@ -2,16 +2,18 @@
 
 declare(strict_types=1);
 
-use App\Boolean;
-use App\Checkbox;
-use App\Db;
-use App\Enum\Status;
-use App\Field;
-use App\PaymentGateway\Paddle\Transaction;
-use App\Radio;
-use App\Text;
-use App\Toaster;
-use App\ToasterPro;
+use App\AbstractClasses\Radio;
+use App\AbstractClasses\Text;
+use App\LateStaticBindings\ClassA;
+use App\LateStaticBindings\ClassB;
+use App\MagicMethods\Invoice;
+use App\Polymorphism\CollectorAgency;
+use App\Polymorphism\DebtCollectionService;
+use App\Polymorphism\SopranoService;
+use App\Traits\AllInOneCoffeeMaker;
+use App\Traits\CappuccinoMaker;
+use App\Traits\CoffeeMaker;
+use App\Traits\LatteMaker;
 
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -39,23 +41,55 @@ require __DIR__ . '/../vendor/autoload.php';
 //$toaster->addSlice('bread');
 //$toaster->toastBeagle();
 
-$fields =
-    [
-        new Text('TextField'),
-        new Checkbox('CheckboxField'),
-        new Radio('RadioField')
-    ];
+//$fields =
+//    [
+//        new Text('TextField'),
+//        new Checkbox('CheckboxField'),
+//        new Radio('RadioField')
+//    ];
+//
+//foreach ($fields as $field) {
+//    echo $field->render() . '<br />';
+//}
 
-foreach ($fields as $field) {
-    echo $field->render() . '<br />';
-}
+//$debtCollectionService = new DebtCollectionService();
+//$collectorAgency = new CollectorAgency();
+//$sopranoService = new SopranoService();
+//
+//$debtCollectionService->collectDebt($collectorAgency, $collectorAgency->getName());
+//$debtCollectionService->collectDebt($sopranoService, $sopranoService->getName());
+
+
+//$invoice = new Invoice();
+//
+//$invoice->process(12, 'value');
+// echo $invoice . PHP_EOL;
+
+
+//$classA = new ClassA();
+//$classB = new ClassB();
+//
+//echo ClassA::getName() . PHP_EOL;
+//echo ClassB::getName() . PHP_EOL;
+
+//var_dump(ClassB::make());
+
+$coffeeMaker = new CoffeeMaker();
+$coffeeMaker->makeCoffee();
+
+$latteMaker = new LatteMaker();
+$latteMaker->makeCoffee();
+
+$cappuccinoMaker = new CappuccinoMaker();
+$cappuccinoMaker->makeCappuccino();
 
 
 
+$coffeeMaker = new AllInOneCoffeeMaker();
 
-
-
-
+$coffeeMaker->makeCoffee();
+$coffeeMaker->makeLatte();
+$coffeeMaker->makeCappuccino();
 
 
 

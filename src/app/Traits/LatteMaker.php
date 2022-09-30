@@ -2,7 +2,8 @@
 
 namespace App\Traits;
 
-class LatteMaker
+class LatteMaker extends CoffeeMaker
 {
+    use LatteTrait;
 
 }

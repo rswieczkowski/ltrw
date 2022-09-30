@@ -2,7 +2,11 @@
 
 namespace App\Traits;
 
-class AllInOneCoffeeMaker
+class AllInOneCoffeeMaker extends CoffeeMaker
 {
+
+    use CappuccinoTrait;
+
+    public string $milkType = 'whole-milk';
 
 }
