@@ -4,19 +4,17 @@ namespace App\Traits;
 
 trait LatteTrait
 {
-
+    protected string $milkType = 'whole-milk';
 
     public function makeLatte(): void
     {
-        echo static::Class . ' is making latte with ' . $this->getMilkType() . '!' . PHP_EOL;
+        echo static::Class . ' is making latte with ' . $this->milkType . '!' . PHP_EOL;
     }
 
-    public function getMilkType(): string
+    public function setMilkType(string $milk): static
     {
-        if (property_exists($this, 'milkType')) {
-            return $this->milkType;
-        }
-        return '';
+        $this->milk = $milk;
+        return $this;
     }
 
 
