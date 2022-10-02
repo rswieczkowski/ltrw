@@ -2,18 +2,11 @@
 
 declare(strict_types=1);
 
-use App\AbstractClasses\Radio;
-use App\AbstractClasses\Text;
-use App\LateStaticBindings\ClassA;
-use App\LateStaticBindings\ClassB;
-use App\MagicMethods\Invoice;
-use App\Polymorphism\CollectorAgency;
-use App\Polymorphism\DebtCollectionService;
-use App\Polymorphism\SopranoService;
-use App\Traits\AllInOneCoffeeMaker;
-use App\Traits\CappuccinoMaker;
-use App\Traits\CoffeeMaker;
-use App\Traits\LatteMaker;
+use App\AnonymousClasses\ClassA;
+use App\AnonymousClasses\MyInterface;
+use App\ObjectComparison\Customer;
+use App\ObjectComparison\CustomInvoice;
+use App\ObjectComparison\Invoice;
 
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -74,27 +67,76 @@ require __DIR__ . '/../vendor/autoload.php';
 
 //var_dump(ClassB::make());
 
-$coffeeMaker = new CoffeeMaker();
-$coffeeMaker->makeCoffee();
-
-$latteMaker = new LatteMaker();
-$latteMaker->makeCoffee();
-
-$cappuccinoMaker = new CappuccinoMaker();
-$cappuccinoMaker->makeCappuccino();
-
-
-
-$coffeeMaker = new AllInOneCoffeeMaker();
-
-$coffeeMaker->makeCoffee();
-$coffeeMaker->makeLatte();
-$coffeeMaker->makeCappuccino();
-
-
+//$coffeeMaker = new CoffeeMaker();
+//$coffeeMaker->makeCoffee();
+//
+//$latteMaker = new LatteMaker();
+//$latteMaker->makeCoffee();
+//
+//$cappuccinoMaker = new CappuccinoMaker();
+//$cappuccinoMaker->makeCappuccino();
+//
+//
+//
+//$coffeeMaker = new AllInOneCoffeeMaker();
+//
+//$coffeeMaker->makeCoffee();
+//$coffeeMaker->makeLatte();
+//$coffeeMaker->makeCappuccino();
 
 
+//$obj = new class(1, 2, 3) implements MyInterface {
+//
+//    public function __construct
+//    (
+//        private int $x,
+//        private int $y,
+//        private int $z
+//    ) {
+//    }
+//
+//
+//};
+//
+//foo($obj);
+//
+//function foo(MyInterface $obj): void
+//{
+//    var_dump($obj);
+//}
 
+//$obj = new ClassA(5,10);
+//
+//var_dump($obj->bar());
 
+$invoice1 = new Invoice(new Customer('Customer 1'), 25, 'Invoice');
+$invoice2 = new Invoice(new Customer('Customer 2'), 25, 'Invoice');
+$invoice4 = new CustomInvoice(new Customer('Customer 3'), 25, 'Invoice');
 
+$invoice3 = $invoice1;
 
+echo '$invoice1 == $invoice2' . PHP_EOL;
+var_dump($invoice1 == $invoice2);
+
+echo '$invoice1 === $invoice2' . PHP_EOL;
+var_dump($invoice1 === $invoice2);
+
+$invoice1->amount = 100;
+
+var_dump($invoice1, $invoice3);
+
+echo '$invoice3 == $invoice1' . PHP_EOL;
+var_dump($invoice3 == $invoice1);
+
+echo '$invoice3 === $invoice1' . PHP_EOL;
+var_dump($invoice3 === $invoice1);
+
+echo '$invoice2 == $invoice4' . PHP_EOL;
+var_dump($invoice2 == $invoice4);
+
+echo '$invoice2 === $invoice4' . PHP_EOL;
+var_dump($invoice2 === $invoice4);
+
+var_dump($invoice2, $invoice4);
+
+var_dump($invoice1 < $invoice2);
