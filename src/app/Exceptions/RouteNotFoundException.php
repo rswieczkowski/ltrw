@@ -1,13 +1,13 @@
 <?php
 
-namespace App;
+namespace App\Exceptions;
 
 use Exception;
 
 class RouteNotfoundException extends Exception
 {
 
- public $message = '404 - Page not found!';
+ protected $message = '404 - Page not found!';
 
 
 }
