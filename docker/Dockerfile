@@ -16,5 +16,6 @@ RUN pecl install xdebug \
 
 COPY ./xdebug.ini "${PHP_INI_DIR}/conf.d"
 
+
 WORKDIR /var/www
 

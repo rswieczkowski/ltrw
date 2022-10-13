@@ -21,6 +21,7 @@ services:
     volumes:
       - ../src:/var/www
       - ./nginx:/etc/nginx/conf.d
+      - ./php:/etc/php/8.1/cli/php.ini
 
   db:
     container_name: ltrw-db
