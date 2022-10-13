@@ -1,6 +1,6 @@
 <?php
 
-namespace App\AbstractClasses;
+namespace AbstractClasses;
 
 abstract class Field
 {

@@ -55,9 +55,9 @@ class ComposerStaticInitde95db83726487db47a2ef1b11decfa2
     );
 
     public static $classMap = array (
-        'App\\PaymentGateway\\Paddle\\CustomerProfile' => __DIR__ . '/../..' . '/app/PaymentGateway/Paddle/CustomerProfile.php',
-        'App\\PaymentGateway\\Paddle\\Transaction' => __DIR__ . '/../..' . '/app/PaymentGateway/Paddle/Transaction.php',
-        'App\\PaymentGateway\\Stripe\\Transaction' => __DIR__ . '/../..' . '/app/PaymentGateway/Stripe/Transaction.php',
+        'PaymentGateway\\Paddle\\CustomerProfile' => __DIR__ . '/../..' . '/app/PaymentGateway/Paddle/CustomerProfile.php',
+        'PaymentGateway\\Paddle\\Transaction' => __DIR__ . '/../..' . '/app/PaymentGateway/Paddle/Transaction.php',
+        'PaymentGateway\\Stripe\\Transaction' => __DIR__ . '/../..' . '/app/PaymentGateway/Stripe/Transaction.php',
         'Brick\\Math\\BigDecimal' => __DIR__ . '/..' . '/brick/math/src/BigDecimal.php',
         'Brick\\Math\\BigInteger' => __DIR__ . '/..' . '/brick/math/src/BigInteger.php',
         'Brick\\Math\\BigNumber' => __DIR__ . '/..' . '/brick/math/src/BigNumber.php',

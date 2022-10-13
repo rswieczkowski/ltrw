@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Exceptions;
+namespace Exceptions;
 
-use Exception;
 use InvalidArgumentException;
 
 class Invoice

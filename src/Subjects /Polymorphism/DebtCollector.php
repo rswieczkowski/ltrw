@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Polymorphism;
+namespace Polymorphism;
 
 interface DebtCollector
 {

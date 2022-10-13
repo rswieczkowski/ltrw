@@ -1,12 +1,8 @@
 <?php
 
-namespace App\Iterators;
+namespace Iterators;
 
 
-
-use ArrayIterator;
-use IteratorAggregate;
-use Traversable;
 
 class AnotherInvoiceCollection extends Collection
 {

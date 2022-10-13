@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Inheritance;
+namespace Inheritance;
 
 class FancyOven
 {

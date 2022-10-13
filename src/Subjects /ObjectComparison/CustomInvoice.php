@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ObjectComparison;
+namespace ObjectComparison;
 
 class CustomInvoice extends Invoice
 {

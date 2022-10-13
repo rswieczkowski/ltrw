@@ -1,6 +1,6 @@
 <?php
 
-namespace App\AnonymousClasses;
+namespace AnonymousClasses;
 
 interface MyInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\PaymentGateway\Stripe;
+namespace PaymentGateway\Stripe;
 
 class Transaction
 {

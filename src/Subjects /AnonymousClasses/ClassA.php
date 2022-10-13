@@ -1,6 +1,8 @@
 <?php
 
-namespace App\AnonymousClasses;
+namespace AnonymousClasses;
+
+
 
 class ClassA
 {
