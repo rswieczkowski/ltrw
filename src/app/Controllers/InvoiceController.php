@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Classes;
+namespace App\Controllers;
 
-class Invoice
+class Controller
 {
 
     public function index(): void
@@ -14,7 +14,7 @@ class Invoice
 
     public function create(): void
     {
-        echo 'Create Invoice';
+        echo 'Create Controller';
 
         echo '<form action="/invoices/create" method="post"><label>Amount</label><input type="text" name="amount" /></form>';
     }
