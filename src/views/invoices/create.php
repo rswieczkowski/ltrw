@@ -1,1 +1,5 @@
-echo '<form action="/invoices/create" method="post"><label>Amount</label><input type="text" name="amount" /></form>';
+
+<form action="/invoices/create" method="post"><label>Amount</label><input type="text" name="amount" /></form>
+
+
+

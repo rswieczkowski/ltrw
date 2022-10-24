@@ -1,1 +1,1 @@
-<?php
+404 page not found

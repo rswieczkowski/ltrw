@@ -4,28 +4,26 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-class Controller
+use App\View;
+
+class InvoiceController
 {
 
-    public function index(): void
+    public function index(): View
     {
-        echo 'Invoices';
+        return View::make('invoices/index');
     }
 
-    public function create(): void
+    public function create(): View
     {
-        echo 'Create Controller';
-
-        echo '<form action="/invoices/create" method="post"><label>Amount</label><input type="text" name="amount" /></form>';
+        return View::make('invoices/create');
     }
 
-    public function store()
+    public function store(): void
     {
         $amount = $_POST['amount'];
 
-        echo '<pre>';
         var_dump($amount);
-        echo '</pre>';
     }
 
 
