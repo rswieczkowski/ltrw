@@ -14,38 +14,51 @@ class HomeController
     public function index(): View
     {
         try {
-            $dsn = 'mysql:host=ltrw-db;dbname=my_db';
+            $dsn = $_ENV['DB_DRIVER'] . ':host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_NAME'];
             $db = new PDO(
-                $dsn, 'root', 'root'
+                $dsn, $_ENV['DB_USER'], $_ENV['DB_PASSWORD']
             );
 
-            $name = $_GET['name'];
-            $email = $_GET['email'];
-            $password = password_hash($_GET['password'], PASSWORD_DEFAULT);
+
+            try {
+                $db->beginTransaction();
+                $name = $_GET['name'];
+                $email = $_GET['email'];
+                $password = password_hash($_GET['password'], PASSWORD_DEFAULT);
+                $amount = $_GET['amount'];
+                $userQuery = 'INSERT INTO users (name, email, password) VALUES(:name, :email, :password)';
+                $invoiceQuery = 'INSERT INTO invoices (amount, user_id) VALUES(:amount , :user_id)';
+                $userStmt = $db->prepare($userQuery);
+                $userStmt->bindValue(':name', $name);
+                $userStmt->bindValue(':email', $email);
+                $userStmt->bindValue(':password', $password);
+                $userStmt->execute();
+                $user_id = $db->lastInsertId();
+                $invoiceStmt = $db->prepare($invoiceQuery);
+                $invoiceStmt->bindValue(':amount', $amount);
+                $invoiceStmt->bindValue(':user_id', $user_id);
+                $invoiceStmt->execute();
+                $db->commit();
+            } catch (\Throwable $e) {
+                if ($db->inTransaction()) {
+                    $db->rollBack();
+                }
+            }
 
 
-            $query = 'INSERT INTO users (name, email, password) VALUES(:name, :email, :password)';
-
-
-            $stmt = $db->prepare($query);
-            $stmt->bindValue(':name', $name);
-            $stmt->bindValue(':email', $email);
-            $stmt->bindValue(':password', $password);
-            $stmt->execute();
-
-
-            foreach ($db->query('SELECT * FROM users')->fetchAll(PDO::FETCH_ASSOC) as $user) {
+            foreach (
+                $db->query('SELECT * FROM users u LEFT JOIN invoices i ON u.id = i.user_id')->fetchAll(
+                    PDO::FETCH_ASSOC
+                ) as $user
+            ) {
                 echo '<pre>';
                 var_dump($user);
                 echo '</pre>';
             }
         } catch (PDOException $e) {
-            throw new PDOException($e->getMessage(), (int) $e->getCode());
+            throw new PDOException($e->getMessage(), (int)$e->getCode());
         }
 
-        echo '<pre>';
-        var_dump($db);
-        echo '</pre>';
 
         return View::make('index', $_GET);
     }
