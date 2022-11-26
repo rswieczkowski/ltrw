@@ -4,66 +4,45 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Application;
+use App\Models\InvoiceModel;
+use App\Models\SignUp;
+use App\Models\UserModel;
 use App\View;
+use JetBrains\PhpStorm\NoReturn;
 use PDO;
 use PDOException;
+
 
 class HomeController
 {
 
+    /**
+     * @throws \Throwable
+     */
     public function index(): View
     {
-        try {
-            $dsn = $_ENV['DB_DRIVER'] . ':host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_NAME'];
-            $db = new PDO(
-                $dsn, $_ENV['DB_USER'], $_ENV['DB_PASSWORD']
-            );
+        $userModel = new UserModel();
+        $invoiceModel = new InvoiceModel();
+
+        $name = $_GET['name'];
+        $email = $_GET['email'];
+        $password = $_GET['email'];
+        $amount = $_GET['amount'];
 
 
-            try {
-                $db->beginTransaction();
-                $name = $_GET['name'];
-                $email = $_GET['email'];
-                $password = password_hash($_GET['password'], PASSWORD_DEFAULT);
-                $amount = $_GET['amount'];
-                $userQuery = 'INSERT INTO users (name, email, password) VALUES(:name, :email, :password)';
-                $invoiceQuery = 'INSERT INTO invoices (amount, user_id) VALUES(:amount , :user_id)';
-                $userStmt = $db->prepare($userQuery);
-                $userStmt->bindValue(':name', $name);
-                $userStmt->bindValue(':email', $email);
-                $userStmt->bindValue(':password', $password);
-                $userStmt->execute();
-                $user_id = $db->lastInsertId();
-                $invoiceStmt = $db->prepare($invoiceQuery);
-                $invoiceStmt->bindValue(':amount', $amount);
-                $invoiceStmt->bindValue(':user_id', $user_id);
-                $invoiceStmt->execute();
-                $db->commit();
-            } catch (\Throwable $e) {
-                if ($db->inTransaction()) {
-                    $db->rollBack();
-                }
-            }
+        $invoiceId = (new SignUp($userModel, $invoiceModel))->register([
+            'name' => $name,
+            'email' => $email,
+            'password' => $password
+        ], [
+            'amount' => $amount
+        ]);
 
-
-            foreach (
-                $db->query('SELECT * FROM users u LEFT JOIN invoices i ON u.id = i.user_id')->fetchAll(
-                    PDO::FETCH_ASSOC
-                ) as $user
-            ) {
-                echo '<pre>';
-                var_dump($user);
-                echo '</pre>';
-            }
-        } catch (PDOException $e) {
-            throw new PDOException($e->getMessage(), (int)$e->getCode());
-        }
-
-
-        return View::make('index', $_GET);
+        return View::make('index', ['invoice' => $invoiceModel->find($invoiceId)]);
     }
 
-    public function download()
+    public function download(): void
     {
         header('Content-type: application/txt');
         header('Content-Disposition: attachment;filename="file.txt"');
@@ -71,7 +50,7 @@ class HomeController
         readfile(STORAGE_PATH . 'test.txt');
     }
 
-    public function upload(): void
+    #[NoReturn] public function upload(): void
     {
         $filePath = STORAGE_PATH . '/' . $_FILES['receipt']['name'];
 

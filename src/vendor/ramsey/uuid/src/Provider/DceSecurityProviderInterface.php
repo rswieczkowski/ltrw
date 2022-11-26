@@ -28,7 +28,7 @@ interface DceSecurityProviderInterface
     /**
      * Returns a user identifier for the system
      *
-     * @link https://en.wikipedia.org/wiki/User_identifier User identifier
+     * @link https://en.wikipedia.org/wiki/User_identifier UserModel identifier
      */
     public function getUid(): IntegerObject;
 

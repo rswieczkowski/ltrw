@@ -1574,7 +1574,7 @@ class HttpClient {
         if (extension_loaded('zlib')) {
             $options['http']['header'] .= "Accept-Encoding: gzip\r\n";
         }
-        $options['http']['header'] .= "User-Agent: ".COMPOSER_INSTALLER."\r\n";
+        $options['http']['header'] .= "UserModel-Agent: ".COMPOSER_INSTALLER."\r\n";
         $options['http']['protocol_version'] = 1.1;
         $options['http']['timeout'] = 600;
 

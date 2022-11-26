@@ -2,22 +2,46 @@
 
 namespace App;
 
+use App\Exceptions\RouteNotFoundException;
+use PDO;
+use PDOException;
+
+/**
+ * @mixin PDO
+ */
 class Db
 {
+    private PDO $pdo;
 
-    public static ?Db $instance = null;
-
-    private function __construct(public array $config)
+    public function __construct(protected $config)
     {
-        echo 'instance of Db created';
-    }
+        try {
+            $dsn =
+                $config['driver'] . ':host=' . $config['host'] . ';dbname=' . $config['name'];
 
-    public static function getInstance(array $config): Db
-    {
-        if (self::$instance === null) {
-            self::$instance = new Db($config);
+            $defaultOptions =
+                [
+                    PDO::ATTR_EMULATE_PREPARES => false,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+                ];
+
+            $this->pdo = new PDO
+            (
+                $dsn,
+                $config['user'],
+                $config['password'],
+                $config['options'] ?? $defaultOptions
+            );
+
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), (int)$e->getCode());
         }
-        return self::$instance;
     }
+
+    public function __call(string $name, array $arguments)
+    {
+       return call_user_func_array([$this->pdo, $name], $arguments);
+    }
+
 
 }
