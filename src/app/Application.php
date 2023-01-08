@@ -3,11 +3,16 @@
 namespace App;
 
 use App\Exceptions\RouteNotFoundException;
+use App\Services\EmailService;
+use App\Services\InvoiceService;
+use App\Services\PaymentGatewayService;
+use App\Services\SalesTaxService;
 
 
 class Application
 {
     private static Db $db;
+
 
     public function __construct
     (
