@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   app:
     build:
@@ -12,6 +10,8 @@ services:
       - "host.docker.internal:host-gateway"
     volumes:
       - ../src:/var/www
+      - ./php:/usr/local/etc/php/conf.d
+
   nginx:
     image: nginx:latest
     container_name: ltrw-nginx
@@ -21,7 +21,6 @@ services:
     volumes:
       - ../src:/var/www
       - ./nginx:/etc/nginx/conf.d
-      - ./php:/etc/php/8.1/cli/php.ini
 
   db:
     container_name: ltrw-db
@@ -33,5 +32,4 @@ services:
       MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: root
     ports:
-      - 3310:3310
-
+      - 3310:3306
