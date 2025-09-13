@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class PaddlePayment implements PaymentGatewayInterface
+class PaddlePaymentService implements PaymentGatewayServiceInterface
 {
 
     public function charge(array $customer, float $amount, float $tax): bool

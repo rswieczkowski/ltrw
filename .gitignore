@@ -2,3 +2,5 @@ storage/
 .env
 .idea/
 .idea/phpunit.xml
+.idea/ltrw.iml
+.idea/php.xml

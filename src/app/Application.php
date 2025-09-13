@@ -5,9 +5,9 @@ namespace App;
 use App\Exceptions\RouteNotFoundException;
 use App\Services\EmailService;
 use App\Services\InvoiceService;
-use App\Services\PaddlePayment;
-use App\Services\StripePayment;
-use App\Services\PaymentGatewayInterface;
+use App\Services\PaddlePaymentService;
+use App\Services\StripePaymentService;
+use App\Services\PaymentGatewayServiceInterface;
 use App\Services\SalesTaxService;
 
 
@@ -26,8 +26,8 @@ class Application
     ) {
         static::$db = new Db($config->db ?? []);
         $this->container->set(
-            PaymentGatewayInterface::class,
-            PaddlePayment::class
+            PaymentGatewayServiceInterface::class,
+            PaddlePaymentService::class
         );
     }
 

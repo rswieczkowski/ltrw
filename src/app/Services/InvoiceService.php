@@ -8,7 +8,7 @@ class InvoiceService
     public function __construct
     (
         protected SalesTaxService $salesTaxService,
-        protected PaymentGatewayInterface $paymentGateway,
+        protected PaymentGatewayServiceInterface $paymentGateway,
         protected EmailService $emailService
     ) {
     }

@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class StripePayment implements PaymentGatewayInterface
+class StripePaymentService implements PaymentGatewayServiceInterface
 {
 
     public function charge($customer, float $amount, float $tax): bool
