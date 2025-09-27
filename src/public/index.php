@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Application;
 use App\Config;
 use App\Container;
+use App\Controllers\GeneratorExampleController;
 use App\Router;
 
 
@@ -20,14 +21,15 @@ const VIEW_PATH = __DIR__ . '/../views';
 $container = new Container();
 $router = new Router($container);
 $router
-    ->get('/', [App\Controllers\HomeController::class, 'index']);
+	->get('/', [App\Controllers\HomeController::class, 'index'])
+	->get('/examples/generator', [GeneratorExampleController::class, 'index']);
 
 
 (new Application(
-    $container,
-    $router,
-    ['uri' => $_SERVER['REQUEST_URI'], 'method' => $_SERVER['REQUEST_METHOD']],
-    new Config($_ENV)
+	$container,
+	$router,
+	['uri' => $_SERVER['REQUEST_URI'], 'method' => $_SERVER['REQUEST_METHOD']],
+	new Config($_ENV)
 ))->run();
 
 
